@@ -270,5 +270,3 @@ Par honnêteté, voici ce que le schéma **ne fait pas** et pourquoi.
 | v2 + XSD | Aucune répétition, types, bornes, clés, références, unicité | Redondance, valeurs absurdes, références cassées, doublons | Règles métier fines (statut énuméré, année ≤ aujourd'hui) |
 
 **Idée à retenir ** : la v1 est facile à écrire mais fragile, car elle répète et ne vérifie que la forme. La v2 impose une discipline (identifiants, références), et XML Schema permet de la **vérifier automatiquement**. C'est le passage d'un document « qui a la bonne forme » à des données « dont on peut se servir ».
-projet terminé avec succès MERCI !!!! 
-BESSAH RAYANE // MOHAMMED BELHAMRA
