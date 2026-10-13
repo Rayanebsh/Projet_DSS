@@ -1,5 +1,6 @@
 <!ELEMENT observations (observation*)>
 <!ELEMENT observation (espece, lieu, annee, nombre)>
+
 <!ELEMENT espece (nom, description)>
 <!ELEMENT lieu (nom, position)>
 <!ELEMENT position (latitude, longitude)>
