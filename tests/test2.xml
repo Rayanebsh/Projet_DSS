@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  test2.xml : document VOLONTAIREMENT INVALIDE par rapport à observations.xsd (v2).
+  Il est bien formé et respecte la structure, mais l'observation fait référence
+  au lieu "L09", qui n'est décrit nulle part (seul L01 existe).
+  Erreur attendue : violation de la contrainte xs:keyref "refLieu".
+-->
+<observations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../v2/observations.xsd">
+  <lieu id="L01">
+    <nom>Parc national des Pyrénées</nom>
+    <position><latitude>42.85</latitude><longitude>-0.15</longitude></position>
+  </lieu>
+  <espece id="E01">
+    <nom>Desman des Pyrénées</nom>
+    <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+  </espece>
+  <observation>
+    <espece ref="E01"/>
+    <!-- ERREUR VOLONTAIRE : L09 n'existe pas -->
+    <lieu ref="L09"/>
+    <annee>2020</annee>
+    <nombre>42</nombre>
+  </observation>
+</observations>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<observations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="observations.xsd">
+
+  <!-- Description des lieux (une seule fois) -->
+  <lieu id="L01">
+    <nom>Parc national des Pyrénées</nom>
+    <position><latitude>42.85</latitude><longitude>-0.15</longitude></position>
+  </lieu>
+  <lieu id="L02">
+    <nom>Parc national du Mercantour</nom>
+    <position><latitude>44.10</latitude><longitude>7.00</longitude></position>
+  </lieu>
+  <lieu id="L03">
+    <nom>Parc national de la Vanoise</nom>
+    <position><latitude>45.40</latitude><longitude>6.80</longitude></position>
+  </lieu>
+
+  <!-- Description des espèces (une seule fois) -->
+  <espece id="E01">
+    <nom>Desman des Pyrénées</nom>
+    <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+  </espece>
+  <espece id="E02">
+    <nom>Gypaète barbu</nom>
+    <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+  </espece>
+  <espece id="E03">
+    <nom>Bouquetin des Alpes</nom>
+    <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+  </espece>
+
+  <!-- Observations : une ligne = une espèce, un lieu, une année, un nombre -->
+  <observation>
+    <espece ref="E01"/>
+    <lieu ref="L01"/>
+    <annee>2020</annee>
+    <nombre>42</nombre>
+  </observation>
+  <observation>
+    <espece ref="E01"/>
+    <lieu ref="L01"/>
+    <annee>2021</annee>
+    <nombre>38</nombre>
+  </observation>
+  <observation>
+    <espece ref="E01"/>
+    <lieu ref="L01"/>
+    <annee>2022</annee>
+    <nombre>35</nombre>
+  </observation>
+  <observation>
+    <espece ref="E01"/>
+    <lieu ref="L01"/>
+    <annee>2023</annee>
+    <nombre>31</nombre>
+  </observation>
+  <observation>
+    <espece ref="E02"/>
+    <lieu ref="L01"/>
+    <annee>2021</annee>
+    <nombre>18</nombre>
+  </observation>
+  <observation>
+    <espece ref="E02"/>
+    <lieu ref="L01"/>
+    <annee>2022</annee>
+    <nombre>21</nombre>
+  </observation>
+  <observation>
+    <espece ref="E02"/>
+    <lieu ref="L01"/>
+    <annee>2023</annee>
+    <nombre>24</nombre>
+  </observation>
+  <observation>
+    <espece ref="E02"/>
+    <lieu ref="L02"/>
+    <annee>2022</annee>
+    <nombre>6</nombre>
+  </observation>
+  <observation>
+    <espece ref="E02"/>
+    <lieu ref="L02"/>
+    <annee>2023</annee>
+    <nombre>8</nombre>
+  </observation>
+  <observation>
+    <espece ref="E03"/>
+    <lieu ref="L02"/>
+    <annee>2021</annee>
+    <nombre>210</nombre>
+  </observation>
+  <observation>
+    <espece ref="E03"/>
+    <lieu ref="L02"/>
+    <annee>2022</annee>
+    <nombre>225</nombre>
+  </observation>
+  <observation>
+    <espece ref="E03"/>
+    <lieu ref="L02"/>
+    <annee>2023</annee>
+    <nombre>218</nombre>
+  </observation>
+  <observation>
+    <espece ref="E03"/>
+    <lieu ref="L03"/>
+    <annee>2022</annee>
+    <nombre>540</nombre>
+  </observation>
+  <observation>
+    <espece ref="E03"/>
+    <lieu ref="L03"/>
+    <annee>2023</annee>
+    <nombre>560</nombre>
+  </observation>
+</observations>

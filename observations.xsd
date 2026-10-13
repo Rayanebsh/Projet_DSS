@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- ===== Types simples ===== -->
+  <xs:simpleType name="IdLieu">
+    <xs:restriction base="xs:string"><xs:pattern value="L[0-9]{2}"/></xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IdEspece">
+    <xs:restriction base="xs:string"><xs:pattern value="E[0-9]{2}"/></xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Texte">
+    <xs:restriction base="xs:string"><xs:minLength value="1"/></xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Latitude">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="-90"/><xs:maxInclusive value="90"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Longitude">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="-180"/><xs:maxInclusive value="180"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Annee">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1900"/><xs:maxInclusive value="2100"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Types complexes ===== -->
+  <xs:complexType name="PositionType">
+    <xs:sequence>
+      <xs:element name="latitude"  type="Latitude"/>
+      <xs:element name="longitude" type="Longitude"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LieuType">
+    <xs:sequence>
+      <xs:element name="nom" type="Texte"/>
+      <xs:element name="position" type="PositionType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="IdLieu" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="EspeceType">
+    <xs:sequence>
+      <xs:element name="nom" type="Texte"/>
+      <xs:element name="description" type="Texte"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="IdEspece" use="required"/>
+  </xs:complexType>
+
+  <!-- Références : éléments vides portant seulement l'attribut ref -->
+  <xs:complexType name="LieuRefType">
+    <xs:attribute name="ref" type="IdLieu" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="EspeceRefType">
+    <xs:attribute name="ref" type="IdEspece" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ObservationType">
+    <xs:sequence>
+      <xs:element name="espece" type="EspeceRefType"/>
+      <xs:element name="lieu"   type="LieuRefType"/>
+      <xs:element name="annee"  type="Annee"/>
+      <xs:element name="nombre" type="xs:nonNegativeInteger"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Élément racine ===== -->
+  <xs:element name="observations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lieu"   type="LieuType"   minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element name="espece" type="EspeceType" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element name="observation" type="ObservationType" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+
+    <!-- Unicité des identifiants -->
+    <xs:key name="cleLieu">
+      <xs:selector xpath="lieu"/><xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="cleEspece">
+      <xs:selector xpath="espece"/><xs:field xpath="@id"/>
+    </xs:key>
+
+    <!-- Intégrité référentielle : chaque ref pointe vers une description existante -->
+    <xs:keyref name="refLieu" refer="cleLieu">
+      <xs:selector xpath="observation/lieu"/><xs:field xpath="@ref"/>
+    </xs:keyref>
+    <xs:keyref name="refEspece" refer="cleEspece">
+      <xs:selector xpath="observation/espece"/><xs:field xpath="@ref"/>
+    </xs:keyref>
+
+    <!-- Une seule observation par (espèce, lieu, année) : pas de doublon -->
+    <xs:unique name="uniqueObservation">
+      <xs:selector xpath="observation"/>
+      <xs:field xpath="espece/@ref"/>
+      <xs:field xpath="lieu/@ref"/>
+      <xs:field xpath="annee"/>
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE observations SYSTEM "observations.dtd">
+<!--
+  observations_v1.xml : version "à plat".
+  Chaque observation redécrit entièrement son espèce et son lieu
+  (les descriptions sont donc répétées). Nombres d'individus fictifs.
+-->
+<observations>
+  <observation>
+    <espece id="E01">
+      <nom>Desman des Pyrénées</nom>
+      <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2020</annee>
+    <nombre>42</nombre>
+  </observation>
+  <observation>
+    <espece id="E01">
+      <nom>Desman des Pyrénées</nom>
+      <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2021</annee>
+    <nombre>38</nombre>
+  </observation>
+  <observation>
+    <espece id="E01">
+      <nom>Desman des Pyrénées</nom>
+      <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2022</annee>
+    <nombre>35</nombre>
+  </observation>
+  <observation>
+    <espece id="E01">
+      <nom>Desman des Pyrénées</nom>
+      <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2023</annee>
+    <nombre>31</nombre>
+  </observation>
+  <observation>
+    <espece id="E02">
+      <nom>Gypaète barbu</nom>
+      <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2021</annee>
+    <nombre>18</nombre>
+  </observation>
+  <observation>
+    <espece id="E02">
+      <nom>Gypaète barbu</nom>
+      <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2022</annee>
+    <nombre>21</nombre>
+  </observation>
+  <observation>
+    <espece id="E02">
+      <nom>Gypaète barbu</nom>
+      <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2023</annee>
+    <nombre>24</nombre>
+  </observation>
+  <observation>
+    <espece id="E02">
+      <nom>Gypaète barbu</nom>
+      <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+    </espece>
+    <lieu id="L02">
+      <nom>Parc national du Mercantour</nom>
+      <position>
+        <latitude>44.10</latitude>
+        <longitude>7.00</longitude>
+      </position>
+    </lieu>
+    <annee>2022</annee>
+    <nombre>6</nombre>
+  </observation>
+  <observation>
+    <espece id="E02">
+      <nom>Gypaète barbu</nom>
+      <description>Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT).</description>
+    </espece>
+    <lieu id="L02">
+      <nom>Parc national du Mercantour</nom>
+      <position>
+        <latitude>44.10</latitude>
+        <longitude>7.00</longitude>
+      </position>
+    </lieu>
+    <annee>2023</annee>
+    <nombre>8</nombre>
+  </observation>
+  <observation>
+    <espece id="E03">
+      <nom>Bouquetin des Alpes</nom>
+      <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+    </espece>
+    <lieu id="L02">
+      <nom>Parc national du Mercantour</nom>
+      <position>
+        <latitude>44.10</latitude>
+        <longitude>7.00</longitude>
+      </position>
+    </lieu>
+    <annee>2021</annee>
+    <nombre>210</nombre>
+  </observation>
+  <observation>
+    <espece id="E03">
+      <nom>Bouquetin des Alpes</nom>
+      <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+    </espece>
+    <lieu id="L02">
+      <nom>Parc national du Mercantour</nom>
+      <position>
+        <latitude>44.10</latitude>
+        <longitude>7.00</longitude>
+      </position>
+    </lieu>
+    <annee>2022</annee>
+    <nombre>225</nombre>
+  </observation>
+  <observation>
+    <espece id="E03">
+      <nom>Bouquetin des Alpes</nom>
+      <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+    </espece>
+    <lieu id="L02">
+      <nom>Parc national du Mercantour</nom>
+      <position>
+        <latitude>44.10</latitude>
+        <longitude>7.00</longitude>
+      </position>
+    </lieu>
+    <annee>2023</annee>
+    <nombre>218</nombre>
+  </observation>
+  <observation>
+    <espece id="E03">
+      <nom>Bouquetin des Alpes</nom>
+      <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+    </espece>
+    <lieu id="L03">
+      <nom>Parc national de la Vanoise</nom>
+      <position>
+        <latitude>45.40</latitude>
+        <longitude>6.80</longitude>
+      </position>
+    </lieu>
+    <annee>2022</annee>
+    <nombre>540</nombre>
+  </observation>
+  <observation>
+    <espece id="E03">
+      <nom>Bouquetin des Alpes</nom>
+      <description>Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC).</description>
+    </espece>
+    <lieu id="L03">
+      <nom>Parc national de la Vanoise</nom>
+      <position>
+        <latitude>45.40</latitude>
+        <longitude>6.80</longitude>
+      </position>
+    </lieu>
+    <annee>2023</annee>
+    <nombre>560</nombre>
+  </observation>
+</observations>

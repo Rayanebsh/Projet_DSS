@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE observations SYSTEM "../v1/observations.dtd">
+<!--
+  test1.xml : document VOLONTAIREMENT INVALIDE par rapport à observations.dtd (v1).
+  Il est bien formé, mais l'observation ci-dessous ne contient pas l'élément <nombre>,
+  alors que la DTD impose : espece, lieu, annee, nombre (dans cet ordre).
+  Erreur attendue : élément <observation> incomplet (nombre manquant).
+-->
+<observations>
+  <observation>
+    <espece id="E01">
+      <nom>Desman des Pyrénées</nom>
+      <description>Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN).</description>
+    </espece>
+    <lieu id="L01">
+      <nom>Parc national des Pyrénées</nom>
+      <position>
+        <latitude>42.85</latitude>
+        <longitude>-0.15</longitude>
+      </position>
+    </lieu>
+    <annee>2020</annee>
+    <!-- ERREUR VOLONTAIRE : <nombre> est absent -->
+  </observation>
+</observations>

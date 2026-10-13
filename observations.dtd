@@ -1,0 +1,13 @@
+<!ELEMENT observations (observation*)>
+<!ELEMENT observation (espece, lieu, annee, nombre)>
+<!ELEMENT espece (nom, description)>
+<!ELEMENT lieu (nom, position)>
+<!ELEMENT position (latitude, longitude)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+<!ELEMENT annee (#PCDATA)>
+<!ELEMENT nombre (#PCDATA)>
+<!ATTLIST espece id CDATA #REQUIRED>
+<!ATTLIST lieu id CDATA #REQUIRED>
