@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <!-- ===== Types simples ===== -->
+  <!-- Types simples : format des identifiants, textes, coordonnées et années. -->
   <xs:simpleType name="IdLieu">
     <xs:restriction base="xs:string"><xs:pattern value="L[0-9]{2}"/></xs:restriction>
   </xs:simpleType>
@@ -31,7 +31,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- ===== Types complexes ===== -->
+  <!-- Types complexes : structure des lieux, espèces et observations. -->
   <xs:complexType name="PositionType">
     <xs:sequence>
       <xs:element name="latitude"  type="Latitude"/>
@@ -55,7 +55,7 @@
     <xs:attribute name="id" type="IdEspece" use="required"/>
   </xs:complexType>
 
-  <!-- Références : éléments vides portant seulement l'attribut ref -->
+  <!-- Références vers les descriptions définies au début du document. -->
   <xs:complexType name="LieuRefType">
     <xs:attribute name="ref" type="IdLieu" use="required"/>
   </xs:complexType>
@@ -73,7 +73,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <!-- ===== Élément racine ===== -->
+  <!-- Racine : listes de lieux, d'espèces, puis d'observations. -->
   <xs:element name="observations">
     <xs:complexType>
       <xs:sequence>

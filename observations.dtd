@@ -1,3 +1,8 @@
+<!--
+  Grammaire de la version à plat (observations_v1.xml).
+  Les identifiants d'espèce et de lieu sont obligatoires ; les valeurs
+  textuelles et numériques sont laissées libres par cette DTD.
+-->
 <!ELEMENT observations (observation*)>
 <!ELEMENT observation (espece, lieu, annee, nombre)>
 

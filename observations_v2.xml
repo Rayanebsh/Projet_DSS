@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Version normalisée : les lieux et les espèces sont décrits une seule fois.
+  Les observations réutilisent ces descriptions grâce aux références ref.
+-->
 <observations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="observations.xsd">
 

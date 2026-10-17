@@ -4,6 +4,8 @@
   observations_v1.xml : version "à plat".
   Chaque observation redécrit entièrement son espèce et son lieu
   (les descriptions sont donc répétées). Nombres d'individus fictifs.
+  La structure est validée par observations.dtd ; chaque observation
+  contient une espèce, un lieu, une année et un nombre d'individus.
 -->
 <observations>
   <observation>
