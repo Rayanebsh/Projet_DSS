@@ -1,9 +1,105 @@
-# DECISIONS : choix de conception et justifications
+# Projet XML : observations d'espèces
 
 Mini-projet « Données semi-structurées et XML » (L3 Informatique, Université de Tours).
+
 **Binôme :** BESSAH Rayane, BELHAMRA Mohammed Tahar
 
-Ce document suit le barème du sujet :
+Ce document regroupe : (1) la liste des fichiers rendus et la façon de les valider, (2) le contrat de nommage et le jeu de données communs, (3) les choix de conception et leurs justifications, dans l'ordre du barème du sujet.
+
+---
+
+## Fichiers rendus
+
+| Fichier | Rôle | Partie du barème |
+|---|---|---|
+| `observations_v1.xml` | Première forme de document (au moins 12 observations, descriptions répétées) | 20 % |
+| `observations.dtd` | DTD de la première forme | 20 % |
+| `observations_v2.xml` | Deuxième forme de document (lieux et espèces décrits une seule fois, puis référencés) | 20 % |
+| `observations.xsd` | Schéma XML Schema de la deuxième forme | 40 % |
+| `README.md` | Ce document (explications des choix, contrat de nommage, jeu de données) | |
+
+Les quatre fichiers `.xml`, `.dtd` et `.xsd` sont commentés.
+
+## Validation
+
+Avec `xmllint` (libxml2), depuis le dossier contenant les fichiers :
+
+```
+# v1 contre la DTD
+xmllint --noout --valid observations_v1.xml
+
+# v2 contre le XML Schema
+xmllint --noout --schema observations.xsd observations_v2.xml
+```
+
+Une validation réussie affiche `... validates` (pour le XSD) ou rien (pour la DTD avec `--noout`).
+
+Hors rendu, nous disposons d'un script `valider.sh` qui lance ces deux validations, et d'un dossier `tests/` contenant des fichiers XML **volontairement invalides** (un par contrainte). Nous en ferons la démonstration à l'oral (voir §4.7).
+
+---
+
+## Contrat de nommage
+
+| Objet | Forme |
+|---|---|
+| Lieu | `<lieu id="L01">` contenant `nom` puis `position` (`latitude`, `longitude`) |
+| Espèce | `<espece id="E01">` contenant `nom` puis `description` |
+| Observation | `<observation>` contenant `espece`, `lieu`, `annee`, `nombre`, dans cet ordre |
+| Identifiants | lieux : `L` + 2 chiffres ; espèces : `E` + 2 chiffres |
+| Noms de balises | en français, minuscules, sans accent (`espece` est imposé par l'énoncé) |
+| Fichiers | `observations_v1.xml` + `observations.dtd` (v1) ; `observations_v2.xml` + `observations.xsd` (v2) |
+
+## Jeu de données commun
+
+Les lieux et les espèces proviennent de France. Les espèces sont issues de la liste rouge de l'UICN ([iucnredlist.org](https://www.iucnredlist.org)), qui donne leur statut et leur répartition mais pas d'observations année par année. **Les nombres d'individus sont donc fictifs**, comme l'énoncé le permet. Les coordonnées sont approximatives.
+
+### Espèces (3)
+
+| id | Nom | Statut UICN | Pourquoi ce choix |
+|---|---|---|---|
+| E01 | Desman des Pyrénées (*Galemys pyrenaicus*) | En danger (EN) | Reclassé « en danger » lors d'une mise à jour de la liste rouge, avec une forte contraction de son aire, dont plus de 60 % dans les Pyrénées françaises. |
+| E02 | Gypaète barbu (*Gypaetus barbatus*) | Quasi menacé (NT) | Classé « préoccupation mineure » en 2004, « quasi menacé » depuis 2014. |
+| E03 | Bouquetin des Alpes (*Capra ibex*) | Préoccupation mineure (LC) | Espèce réintroduite dans les Alpes, aujourd'hui abondante. |
+
+Trois statuts différents rendent le jeu de données plus parlant à l'oral.
+
+Le contrat n'a pas de balise « statut » : il est écrit dans la balise `<description>`.
+
+| id | Contenu de `<description>` |
+|---|---|
+| E01 | Petit mammifère semi-aquatique des torrents pyrénéens. Statut UICN : en danger (EN). |
+| E02 | Grand rapace charognard qui se nourrit surtout d'os. Statut UICN : quasi menacé (NT). |
+| E03 | Ongulé de montagne réintroduit dans les Alpes. Statut UICN : préoccupation mineure (LC). |
+
+### Lieux (3 parcs nationaux)
+
+| id | Nom | latitude | longitude |
+|---|---|---|---|
+| L01 | Parc national des Pyrénées | 42.85 | -0.15 |
+| L02 | Parc national du Mercantour | 44.10 | 7.00 |
+| L03 | Parc national de la Vanoise | 45.40 | 6.80 |
+
+Ces lieux sont cohérents avec le gypaète barbu, dont les sites Natura 2000 français incluent la Vanoise, le Mercantour et le cirque de Gavarnie.
+
+### Observations (14)
+
+| Lieu | Espèce | Années | Nombres (fictifs) |
+|---|---|---|---|
+| L01 | E01 Desman | 2020, 2021, 2022, 2023 | 42, 38, 35, 31 |
+| L01 | E02 Gypaète | 2021, 2022, 2023 | 18, 21, 24 |
+| L02 | E02 Gypaète | 2022, 2023 | 6, 8 |
+| L02 | E03 Bouquetin | 2021, 2022, 2023 | 210, 225, 218 |
+| L03 | E03 Bouquetin | 2022, 2023 | 540, 560 |
+
+Total : 4 + 3 + 2 + 3 + 2 = **14 observations**.
+
+Les nombres du desman baissent et ceux du gypaète augmentent, pour que les évolutions année par année racontent quelque chose de réaliste.
+
+---
+
+# Choix de conception et justifications
+
+Cette partie suit le barème du sujet :
 
 | Partie | Sujet | Poids |
 |---|---|---|
@@ -12,7 +108,7 @@ Ce document suit le barème du sujet :
 | 3 | Deuxième forme de document (`observations_v2.xml`) | 20 % |
 | 4 | Schéma XML Schema (`observations.xsd`) | 40 % |
 
-Le contrat de nommage commun (balises, identifiants, ordre des éléments) et le jeu de données sont décrits dans le `README.md`. Ici, on explique **pourquoi** on a fait ces choix.
+Le contrat de nommage commun (balises, identifiants, ordre des éléments) et le jeu de données sont décrits dans les sections « Contrat de nommage » et « Jeu de données commun » ci-dessus. Ici, on explique **pourquoi** on a fait ces choix.
 
 ---
 
@@ -199,7 +295,7 @@ Les éléments internes sont des **déclarations locales** et non globales : seu
 
 | Type | Base | Restriction | Justification |
 |---|---|---|---|
-| `IdLieu` | `xs:string` | motif `L[0-9]{2}` | Impose le contrat du README (`L` + 2 chiffres). Rejette `l1`, `L001`, `X01`. |
+| `IdLieu` | `xs:string` | motif `L[0-9]{2}` | Impose le contrat de nommage (`L` + 2 chiffres). Rejette `l1`, `L001`, `X01`. |
 | `IdEspece` | `xs:string` | motif `E[0-9]{2}` | Idem pour les espèces. Deux types distincts : **impossible de référencer un lieu à la place d'une espèce** (`<espece ref="L01"/>` est refusé). |
 | `Texte` | `xs:string` | `minLength = 1` | Un nom ou une description vide n'a aucun sens. |
 | `Latitude` | `xs:decimal` | -90 à 90 | Bornes géographiques réelles. `decimal` (et non `double`) : valeurs exactes en base 10, sans notation scientifique ni `NaN`/`INF`. |
@@ -229,11 +325,11 @@ Un même nom avec deux types différents est permis parce que les deux déclarat
 
 Placées sur l'élément racine, elles apportent ce que `ID`/`IDREF` d'une DTD ne pouvait pas offrir.
 
-1. **`xs:key` `cleLieu` et `cleEspece`**: unicité **et** présence des identifiants. Deux lieux avec `id="L01"` sont refusés, et un `id` manquant aussi (une `key` l'exige, contrairement à `unique`).
+1. **`xs:key` `cleLieu` et `cleEspece`** : unicité **et** présence des identifiants. Deux lieux avec `id="L01"` sont refusés, et un `id` manquant aussi (une `key` l'exige, contrairement à `unique`).
 
-2. **`xs:keyref` `refLieu` et `refEspece`**: **intégrité référentielle**. Chaque `<lieu ref="…"/>` d'une observation doit désigner un `<lieu id="…">` existant. Une observation qui renvoie à `L09` inexistant est refusée.
+2. **`xs:keyref` `refLieu` et `refEspece`** : **intégrité référentielle**. Chaque `<lieu ref="…"/>` d'une observation doit désigner un `<lieu id="…">` existant. Une observation qui renvoie à `L09` inexistant est refusée.
 
-3. **`xs:unique` `uniqueObservation`**: un seul relevé par triplet **(espèce, lieu, année)**. Sinon, deux valeurs contradictoires pour le même point de la courbe d'évolution (par exemple deux nombres pour le desman à L01 en 2021).
+3. **`xs:unique` `uniqueObservation`** : un seul relevé par triplet **(espèce, lieu, année)**. Sinon, deux valeurs contradictoires pour le même point de la courbe d'évolution (par exemple deux nombres pour le desman à L01 en 2021).
 
 **Pourquoi `key`/`keyref` plutôt que `xs:ID`/`xs:IDREF` ?**
 - `xs:ID` et `xs:IDREF` partagent un **espace de noms unique** dans tout le document : un lieu `L01` et une espèce `E01` doivent être distincts entre eux, et surtout ils ne distinguent pas la *nature* de la cible. Un `IDREF` peut pointer vers n'importe quel `ID`, y compris un lieu là où on attend une espèce.
@@ -248,7 +344,7 @@ Par honnêteté, voici ce que le schéma **ne fait pas** et pourquoi.
 |---|---|
 | Année « pas dans le futur » | XSD 1.0 ne peut pas comparer à la date du jour. XSD 1.1 le permettrait avec `xs:assert`, mais `xmllint` ne gère que XSD 1.0. On a donc retenu des bornes fixes (1900 à 2100). |
 | « Plusieurs années successives » pour chaque série | Exigence de l'énoncé sur le **jeu de données**, pas une règle de structure : un schéma ne peut pas imposer qu'un couple (espèce, lieu) ait au moins deux années consécutives. Elle est respectée dans nos données (voir §0). |
-| Format `L` + 2 chiffres : maximum 99 lieux et 99 espèces | Choix de simplicité fixé par le contrat du README. Passer à `L[0-9]+` suffirait si le volume augmentait. |
+| Format `L` + 2 chiffres : maximum 99 lieux et 99 espèces | Choix de simplicité fixé par le contrat de nommage. Passer à `L[0-9]+` suffirait si le volume augmentait. |
 | `Texte` accepte une chaîne d'espaces seulement | On pourrait ajouter un motif `\S.*` ou `xs:whiteSpace collapse`. Non fait, pour rester lisible. |
 | Statut UICN noyé dans `description` | En production, on ajouterait un attribut `statut` énuméré (`EX, EW, CR, EN, VU, NT, LC, DD`) avec `xs:enumeration` : c'est là que XSD brille. Non fait ici, car le contrat commun du binôme ne le prévoit pas. |
 | Pas d'espace de noms cible | Voir §3.3. Pour un standard d'échange réel, on définirait un `targetNamespace`. |
@@ -257,8 +353,9 @@ Par honnêteté, voici ce que le schéma **ne fait pas** et pourquoi.
 
 ### 4.7 Vérification : comment on sait que ça marche
 
-- `valider.sh` valide la v1 contre la DTD (`xmllint --noout --valid`) et la v2 contre le XSD (`xmllint --noout --schema`).
-- Le dossier `tests/` contient des fichiers **volontairement invalides** (un par contrainte : id mal formé, latitude hors bornes, `nombre` négatif, référence inexistante, identifiant dupliqué, observation en double…). Le script vérifie que chacun est **refusé** ; il signale un « PROBLÈME » si l'un passe. Un schéma qui n'a jamais rejeté de document n'est pas prouvé : ces tests montrent que chaque contrainte *mord* vraiment.
+- La v1 est validée contre la DTD (`xmllint --noout --valid`) et la v2 contre le XSD (`xmllint --noout --schema`), voir la section « Validation » en tête de ce document. Notre script `valider.sh` lance ces deux validations.
+- Notre dossier `tests/` contient des fichiers **volontairement invalides** (un par contrainte : id mal formé, latitude hors bornes, `nombre` négatif, référence inexistante, identifiant dupliqué, observation en double…). Le script vérifie que chacun est **refusé** ; il signale un « PROBLÈME » si l'un passe. Un schéma qui n'a jamais rejeté de document n'est pas prouvé : ces tests montrent que chaque contrainte *mord* vraiment.
+- Ces deux éléments ne font pas partie des fichiers rendus (limite de 5 fichiers) ; nous en ferons la démonstration à l'oral.
 
 ---
 
@@ -269,4 +366,4 @@ Par honnêteté, voici ce que le schéma **ne fait pas** et pourquoi.
 | v1 + DTD | Structure et ordre validés, simple | Document bien formé et correctement structuré | Données répétées, aucun typage, pas de contrôle de cohérence |
 | v2 + XSD | Aucune répétition, types, bornes, clés, références, unicité | Redondance, valeurs absurdes, références cassées, doublons | Règles métier fines (statut énuméré, année ≤ aujourd'hui) |
 
-**Idée à retenir ** : la v1 est facile à écrire mais fragile, car elle répète et ne vérifie que la forme. La v2 impose une discipline (identifiants, références), et XML Schema permet de la **vérifier automatiquement**. C'est le passage d'un document « qui a la bonne forme » à des données « dont on peut se servir ».
+**Idée à retenir** : la v1 est facile à écrire mais fragile, car elle répète et ne vérifie que la forme. La v2 impose une discipline (identifiants, références), et XML Schema permet de la **vérifier automatiquement**. C'est le passage d'un document « qui a la bonne forme » à des données « dont on peut se servir ».
