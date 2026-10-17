@@ -3,7 +3,6 @@
 Mini-projet « Données semi-structurées et XML » (L3 Informatique, Université de Tours).
 
 **Binôme :** BESSAH Rayane, BELHAMRA Mohammed Tahar
-**Rendu :** Celene, avant le 18/10/2026 à minuit. **Oral :** 19/10/2026.
 
 ## Arborescence
 
